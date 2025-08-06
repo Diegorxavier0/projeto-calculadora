@@ -12,12 +12,12 @@ namespace Calculadora
 
 
             //Validação de Campos 
-
+            // Verifica se os campos estão vazios
             if (string.IsNullOrWhiteSpace(txtNumero1.Text))
             {
                 MessageBox.Show("O campo Número 1 está vazio!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNumero1.Focus();
-                return; // Sai do método para não tentar somar
+                return;
             }
 
             if (string.IsNullOrWhiteSpace(txtNumero2.Text))
@@ -26,6 +26,29 @@ namespace Calculadora
                 txtNumero2.Focus();
                 return;
             }
+
+            // Tenta converter os textos para números (evita letras)
+            double num1, num2;
+
+            bool conversao1 = double.TryParse(txtNumero1.Text, out num1);
+            bool conversao2 = double.TryParse(txtNumero2.Text, out num2);
+
+            if (!conversao1)
+            {
+                MessageBox.Show("O campo Número 1 deve conter apenas números!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNumero1.Focus();
+                return;
+            }
+
+            if (!conversao2)
+            {
+                MessageBox.Show("O campo Número 2 deve conter apenas números!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNumero2.Focus();
+                return;
+            }
+
+
+
 
 
             // Verifica se os campos de entrada estão preenchidos
